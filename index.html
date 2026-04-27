@@ -152,8 +152,8 @@
   .stat-num { font-family: 'DB Adman X', sans-serif; font-size: 2.5rem; color: var(--text); line-height: 1; }
   .stat-num span { color: var(--accent); }
   .stat-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.25rem; }
-  .about-img-wrap { background: var(--bg3); border: 1px solid var(--border); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; max-width: 70%; margin-left: auto; }
-  .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+  .about-img-wrap { background: var(--bg3); border: 1px solid var(--border); aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; max-width: 70%; margin-left: auto; }
+  .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
   .about-img-wrap::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(226,75,74,0.15), transparent 60%); pointer-events: none; }
   .about-placeholder { font-family: 'DB Adman X', sans-serif; font-size: 1rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.15); text-align: center; }
   .about-placeholder small { display: block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; margin-top: 0.5rem; }
@@ -453,6 +453,7 @@
 
   <div class="hero-cta">
     <a class="btn-primary" href="#work">View My Work</a>
+    <a class="btn-ghost" href="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/RESUME_Supakorn_Khawpong.pdf" download target="_blank">Download Resume</a>
     <a class="btn-ghost" href="#contact">Get in Touch</a>
   </div>
   <div class="hero-scroll">Scroll</div>
@@ -499,7 +500,26 @@
   </div>
 </div>
 
-<!-- SHARE BUTTON -->
+<!-- AMBIENT AUDIO -->
+<audio id="ambient-audio" loop>
+  <source src="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Stereo%20Nuts%20-%20Interstellar.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SOUND TOGGLE -->
+<button id="sound-btn" onclick="toggleSound()" style="
+  position: fixed; right: 1.5rem; bottom: 17rem; z-index: 500;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--muted);
+  transition: all 0.25s;
+  font-size: 14px;
+" onmouseover="this.style.background='rgba(226,75,74,0.15)';this.style.borderColor='rgba(226,75,74,0.4)';this.style.color='#e24b4a'"
+   onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--muted)'">
+  🔇
+</button>
 <div class="share-toast" id="share-toast">LINK COPIED!</div>
 <button class="share-btn" onclick="sharePortfolio()" title="Share">
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -538,7 +558,7 @@
          Put the image file in the same folder as this HTML file -->
     <div>
       <div class="about-img-wrap">
-        <img src="img_20251030_113152_743.webp" alt="Supakorn Khawpong">
+        <img src="169258.jpg" alt="Supakorn Khawpong">
         <div class="about-corner"></div>
       </div>
     </div>
@@ -1266,6 +1286,24 @@
 </footer>
 
 <script>
+  // Ambient Sound
+  const audio = document.getElementById('ambient-audio');
+  const soundBtn = document.getElementById('sound-btn');
+  audio.volume = 0.15;
+  let soundOn = false;
+
+  function toggleSound() {
+    if (soundOn) {
+      audio.pause();
+      soundBtn.textContent = '🔇';
+      soundOn = false;
+    } else {
+      audio.play().catch(() => {});
+      soundBtn.textContent = '🔊';
+      soundOn = true;
+    }
+  }
+
   // Hamburger Menu
   function toggleMenu() {
     const hamburger = document.getElementById('hamburger');
