@@ -7,7 +7,7 @@
 <!-- ============================================================
      SUPAKORN KHAWPONG — PORTFOLIO WEBSITE
      ============================================================
-         ============================================================ -->
+          ============================================================ -->
 
 <title>Supakorn Khawpong — Video Editor</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -136,24 +136,60 @@
   .filter-btn:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
   .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(226,75,74,0.08); }
 
+  /* ── TABLET (iPad) ── */
+  @media (max-width: 1024px) {
+    nav { padding: 1rem 2rem; }
+    .hero, section { padding-left: 2rem; padding-right: 2rem; }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { gap: 3rem; }
+    .skills-layout { gap: 3rem; }
+  }
+
+  /* ── MOBILE (768px) ── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     nav ul { gap: 0.8rem; }
     nav ul li a { font-size: 9px; letter-spacing: 0.08em; }
     .nav-logo { font-size: 1.1rem; }
-    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .about-grid, .skills-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero h1 { font-size: clamp(2.8rem, 14vw, 5rem); }
+    .hero-sub { font-size: 12px; }
+    .hero-cta { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+    .hero-scroll { display: none; }
+    .about-grid, .skills-layout { grid-template-columns: 1fr; gap: 2.5rem; }
     .about-img-wrap { max-width: 100%; margin-left: 0; }
     .projects-grid { grid-template-columns: 1fr; }
     .filter-bar { flex-wrap: wrap; gap: 0.5rem; }
-    .filter-btn { flex: 1; text-align: center; padding: 0.5rem 1rem; }
+    .filter-btn { flex: 1; text-align: center; padding: 0.5rem 1rem; font-size: 10px; }
+    .skill-name { min-width: 120px; font-size: 10px; }
+    .contact-link { padding: 1rem 0.75rem; }
+    .cl-value { font-size: 11px; }
+    .section-label { font-size: 10px; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    #scroll-btn { width: 38px; height: 38px; right: 1rem; bottom: 1.5rem; }
   }
 
+  /* ── SMALL MOBILE (400px) ── */
   @media (max-width: 400px) {
     nav ul { gap: 0.5rem; }
     nav ul li a { font-size: 8px; letter-spacing: 0.05em; }
     .nav-logo { font-size: 1rem; }
+    .hero h1 { font-size: clamp(2.4rem, 13vw, 3.5rem); }
+    .about-title { font-size: clamp(2rem, 10vw, 3rem); }
+  }
+
+  /* ── MACBOOK / LARGE DESKTOP ── */
+  @media (min-width: 1440px) {
+    .hero, section { padding-left: 5rem; padding-right: 5rem; }
+    nav { padding: 1.2rem 5rem; }
+    .projects-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (min-width: 1920px) {
+    .hero, section { padding-left: 8rem; padding-right: 8rem; }
+    nav { padding: 1.2rem 8rem; }
   }
 </style>
 </head>
@@ -193,7 +229,7 @@
   </h1>
 
   <!-- 📝 One-line description of yourself -->
-  <p class="hero-sub">Crafting cinematic stories that move audiences — from live events to branded content, every cut has a purpose.</p>
+  <p class="hero-sub">WELCOME TO ZO WORK PLEASE ENJOY</p>
 
   <div class="hero-cta">
     <a class="btn-primary" href="#work">View My Work</a>
@@ -201,6 +237,33 @@
   </div>
   <div class="hero-scroll">Scroll</div>
 </section>
+
+<!-- FLOATING SCROLL BUTTON -->
+<a href="#contact" id="scroll-btn" style="
+  position: fixed;
+  right: 1.5rem;
+  bottom: 2rem;
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--muted);
+  transition: all 0.25s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+" onmouseover="this.style.background='rgba(226,75,74,0.15)';this.style.borderColor='rgba(226,75,74,0.4)';this.style.color='#e24b4a'"
+   onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--muted)'">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path d="M7 2v10M2 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
 
 <!-- ============================================================
      🟡 ABOUT SECTION
@@ -210,7 +273,7 @@
   <div class="section-label">About Me <span>/ 01</span></div>
   <div class="about-grid">
     <div>
-      <h2 class="about-title">I Cut <em>Stories,</em><br>Not Just Footage.</h2>
+      <h2 class="about-title">I Edit <em style="color:var(--accent);font-style:normal;">Films.</em> Design <em style="color:var(--accent);font-style:normal;">Visuals.</em><br>Tell Stories.</h2>
 
       <!-- 📝 Write about yourself here — change both paragraphs -->
       <p class="about-body">
@@ -250,6 +313,7 @@
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="visual">Visual</button>
     <button class="filter-btn" data-filter="edit">Editor</button>
+    <button class="filter-btn" data-filter="photo">Photo</button>
   </div>
 
   <!-- VISUAL SUBSECTION -->
@@ -560,13 +624,58 @@
     </div>
 
   </div>
+
+  <!-- PHOTO SUBSECTION -->
+  <div class="section-label filter-heading" data-section="photo" style="margin-top:4rem; color: var(--text); letter-spacing:0.2em;">Photo</div>
+  <div class="projects-grid" id="photo-grid">
+
+    <!-- ALBUM 1 -->
+    <div class="project-card album-card" onclick="openAlbum('visual-work')" style="cursor:pointer;">
+      <div class="project-thumb" style="overflow:hidden;">
+        <img src="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/J_500018.jpg" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;bottom:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);padding:0.25rem 0.6rem;font-size:10px;letter-spacing:0.1em;color:#fff;backdrop-filter:blur(4px);">14 PHOTOS</div>
+      </div>
+      <div class="project-cat">Album</div>
+      <div class="project-name">Visual Work</div>
+      <p class="project-desc">Behind the scenes from Visual projects.</p>
+      <div class="project-meta"><span>2026</span><span>Work</span></div>
+    </div>
+
+    <!-- ALBUM 2 -->
+    <div class="project-card album-card" onclick="openAlbum('edit-work')" style="cursor:pointer;">
+      <div class="project-thumb" style="overflow:hidden;">
+        <img src="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-41-35-616_com.instagram.android-edit.jpg" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;bottom:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);padding:0.25rem 0.6rem;font-size:10px;letter-spacing:0.1em;color:#fff;backdrop-filter:blur(4px);">10 PHOTOS</div>
+      </div>
+      <div class="project-cat">Album</div>
+      <div class="project-name">Edit Work</div>
+      <p class="project-desc">Behind the scenes from Edit projects.</p>
+      <div class="project-meta"><span>2026</span><span>Work</span></div>
+    </div>
+
+  </div>
 </section>
 
-<!-- ============================================================
-     🔵 SKILLS SECTION
-     Change the skill name and the percentage (data-w and the display text)
-     Example: data-w="85%" and <span>85%</span> must match
-     ============================================================ -->
+<!-- ALBUM OVERLAY -->
+<div id="album-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; overflow-y:auto; padding:2rem;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;">
+      <div id="album-title" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted);"></div>
+      <button onclick="closeAlbum()" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--text); padding:0.5rem 1.5rem; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; cursor:pointer;">✕ CLOSE</button>
+    </div>
+    <div id="album-empty" style="display:none; text-align:center; padding:4rem; color:var(--muted); font-size:13px; letter-spacing:0.1em;">No photos yet — add some!</div>
+    <div id="album-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:4px;"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.97); z-index:2000; align-items:center; justify-content:center; flex-direction:column;">
+  <button onclick="closeLightbox()" style="position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">✕</button>
+  <button onclick="prevPhoto()" style="position:absolute; left:1.5rem; background:none; border:none; color:white; font-size:2rem; cursor:pointer; top:50%; transform:translateY(-50%);">‹</button>
+  <button onclick="nextPhoto()" style="position:absolute; right:1.5rem; background:none; border:none; color:white; font-size:2rem; cursor:pointer; top:50%; transform:translateY(-50%);">›</button>
+  <img id="lightbox-img" src="" style="max-width:90vw; max-height:85vh; object-fit:contain;">
+  <div id="lightbox-caption" style="margin-top:1rem; font-size:11px; letter-spacing:0.15em; color:rgba(255,255,255,0.4); text-transform:uppercase;"></div>
+</div>
 <section id="skills">
   <div class="section-label">Skills &amp; Tools <span>/ 03</span></div>
   <div class="skills-layout">
@@ -689,6 +798,7 @@
   const filterBtns = document.querySelectorAll('.filter-btn');
   const visualGrid = document.getElementById('visual-grid');
   const editGrid = document.getElementById('edit-grid');
+  const photoGrid = document.getElementById('photo-grid');
   const headings = document.querySelectorAll('.filter-heading');
 
   filterBtns.forEach(btn => {
@@ -700,17 +810,127 @@
       if (filter === 'all') {
         visualGrid.style.display = 'grid';
         editGrid.style.display = 'grid';
+        photoGrid.style.display = 'grid';
         headings.forEach(h => h.style.display = 'flex');
       } else if (filter === 'visual') {
         visualGrid.style.display = 'grid';
         editGrid.style.display = 'none';
+        photoGrid.style.display = 'none';
         headings.forEach(h => h.style.display = h.dataset.section === 'visual' ? 'flex' : 'none');
       } else if (filter === 'edit') {
         visualGrid.style.display = 'none';
         editGrid.style.display = 'grid';
+        photoGrid.style.display = 'none';
         headings.forEach(h => h.style.display = h.dataset.section === 'edit' ? 'flex' : 'none');
+      } else if (filter === 'photo') {
+        visualGrid.style.display = 'none';
+        editGrid.style.display = 'none';
+        photoGrid.style.display = 'grid';
+        headings.forEach(h => h.style.display = h.dataset.section === 'photo' ? 'flex' : 'none');
       }
     });
+  });
+
+  // Album data — add photo URLs here
+  const albums = {
+    'visual-work': {
+      title: 'Visual Work',
+      photos: [
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD-12.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20251029_131439.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20251029_140431.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20251202_084806.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20260124_005234_1.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20260124_151027.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20260204_194051.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20260213_164354.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20260227_125254.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20260227_230833.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/J_500018.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20260425_152229.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-42-32-214_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-42-50-561_com.instagram.android-edit.jpg', caption: '' },
+      ]
+    },
+    'edit-work': {
+      title: 'Edit Work',
+      photos: [
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-36-38-749_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-37-05-637_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-37-29-962_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-37-58-562_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-38-09-269_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-38-21-795_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-40-34-046_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-41-24-384_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-41-35-616_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-41-56-613_com.instagram.android-edit.jpg', caption: '' },
+      ]
+    }
+  };
+
+  let currentPhotos = [];
+  let currentIndex = 0;
+
+  function openAlbum(id) {
+    const album = albums[id];
+    document.getElementById('album-title').textContent = album.title;
+    const grid = document.getElementById('album-grid');
+    const empty = document.getElementById('album-empty');
+    grid.innerHTML = '';
+
+    if (album.photos.length === 0) {
+      empty.style.display = 'block';
+      grid.style.display = 'none';
+    } else {
+      empty.style.display = 'none';
+      grid.style.display = 'grid';
+      currentPhotos = album.photos;
+      album.photos.forEach((photo, i) => {
+        const img = document.createElement('img');
+        img.src = photo.src;
+        img.style.cssText = 'width:100%; aspect-ratio:1; object-fit:cover; cursor:pointer; transition:opacity 0.2s;';
+        img.onmouseover = () => img.style.opacity = '0.7';
+        img.onmouseout = () => img.style.opacity = '1';
+        img.onclick = () => openLightbox(i);
+        grid.appendChild(img);
+      });
+    }
+    document.getElementById('album-overlay').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAlbum() {
+    document.getElementById('album-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function openLightbox(index) {
+    currentIndex = index;
+    const lb = document.getElementById('lightbox');
+    lb.style.display = 'flex';
+    document.getElementById('lightbox-img').src = currentPhotos[index].src;
+    document.getElementById('lightbox-caption').textContent = currentPhotos[index].caption || '';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+  function prevPhoto() {
+    currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+    openLightbox(currentIndex);
+  }
+
+  function nextPhoto() {
+    currentIndex = (currentIndex + 1) % currentPhotos.length;
+    openLightbox(currentIndex);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLightbox(); closeAlbum(); }
+    if (e.key === 'ArrowLeft') prevPhoto();
+    if (e.key === 'ArrowRight') nextPhoto();
   });
 
   // Skill bars animate when scrolled into view
