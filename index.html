@@ -141,11 +141,47 @@
   .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(226,75,74,0.08); }
 
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; } nav ul { gap: 1.5rem; }
-    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .about-grid, .skills-layout { grid-template-columns: 1fr; gap: 3rem; }
+    /* NAV */
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1rem; }
+    nav ul li a { font-size: 10px; }
+
+    /* HERO */
+    .hero { padding: 0 1.5rem 4rem; }
+    .hero h1 { font-size: clamp(2.8rem, 14vw, 5rem); }
+    .hero-sub { font-size: 12px; }
+    .hero-cta { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+    .hero-scroll { display: none; }
+
+    /* SECTIONS */
+    section { padding: 4rem 1.5rem; }
+
+    /* ABOUT */
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-img-wrap { max-width: 100%; margin-left: 0; }
+
+    /* SKILLS */
+    .skills-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .skill-name { min-width: 120px; font-size: 10px; }
+
+    /* PROJECTS */
     .projects-grid { grid-template-columns: 1fr; }
+    .filter-bar { flex-wrap: wrap; gap: 0.5rem; }
+    .filter-btn { flex: 1; text-align: center; padding: 0.5rem 1rem; }
+
+    /* CONTACT */
+    .contact-link { padding: 1rem 0.75rem; }
+    .cl-value { font-size: 11px; }
+
+    /* FOOTER */
     footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+  }
+
+  @media (max-width: 400px) {
+    nav ul { gap: 0.6rem; }
+    nav ul li a { font-size: 9px; letter-spacing: 0.08em; }
+    .hero h1 { font-size: clamp(2.4rem, 13vw, 3.5rem); }
   }
 </style>
 </head>
