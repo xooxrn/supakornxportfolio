@@ -7,8 +7,7 @@
 <!-- ============================================================
      SUPAKORN KHAWPONG — PORTFOLIO WEBSITE
      ============================================================
-     
-     ============================================================ -->
+          ============================================================ -->
 
 <title>Supakorn Khawpong — Video Editor</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -266,6 +265,33 @@
   </svg>
 </a>
 
+<!-- SCROLL TO TOP BUTTON -->
+<a href="#home" id="scroll-top-btn" style="
+  position: fixed;
+  right: 1.5rem;
+  bottom: 5.5rem;
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--muted);
+  transition: all 0.25s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+" onmouseover="this.style.background='rgba(226,75,74,0.15)';this.style.borderColor='rgba(226,75,74,0.4)';this.style.color='#e24b4a'"
+   onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--muted)'">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path d="M7 12V2M2 7l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
+
 <!-- ============================================================
      🟡 ABOUT SECTION
      Change the bio paragraphs and your 3 stats below
@@ -314,7 +340,7 @@
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="visual">Visual</button>
     <button class="filter-btn" data-filter="edit">Editor</button>
-    <button class="filter-btn" data-filter="photo">Photo</button>
+    <button class="filter-btn" data-filter="photo">Other</button>
   </div>
 
   <!-- VISUAL SUBSECTION -->
@@ -627,7 +653,7 @@
   </div>
 
   <!-- PHOTO SUBSECTION -->
-  <div class="section-label filter-heading" data-section="photo" style="margin-top:4rem; color: var(--text); letter-spacing:0.2em;">Photo</div>
+  <div class="section-label filter-heading" data-section="photo" style="margin-top:4rem; color: var(--text); letter-spacing:0.2em;">Other</div>
   <div class="projects-grid" id="photo-grid">
 
     <!-- ALBUM 1 -->
