@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================================================
+     SUPAKORN KHAWPONG — PORTFOLIO WEBSITE
+     ============================================================
+     HOW TO EDIT THIS FILE:
+     1. Open this file in any text editor (Notepad, VS Code, etc.)
+     2. Find the section you want to change using the comments below
+     3. Save the file and open it in your browser to see changes
+     ============================================================ -->
+
+<title>Supakorn Khawpong — Video Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'DB Adman X';
+    src: url('DB_Adman_X_BdIt.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+</style>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #E24B4A;       /* 🎨 CHANGE THIS to change the red accent color */
+    --bg: #0a0a0a;
+    --bg3: #1a1a1a;
+    --border: rgba(255,255,255,0.07);
+    --text: #f0ede8;
+    --muted: #888;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.7; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'DB Adman X', sans-serif; font-size: 1.4rem; letter-spacing: 0.12em; color: var(--text); }
+  .nav-logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav ul li a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+  nav ul li a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 3rem 5rem; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(226,75,74,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(226,75,74,0.06) 0%, transparent 60%); }
+  .hero-lines { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.025) 80px); }
+  .hero-tag { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-tag::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
+  .hero h1 { font-family: 'DB Adman X', sans-serif; font-size: clamp(3.5rem, 9vw, 8rem); line-height: 0.92; letter-spacing: 0.02em; position: relative; z-index: 1; }
+  .hero h1 .outline { -webkit-text-stroke: 1px rgba(255,255,255,0.25); color: transparent; }
+  .hero h1 .accent-name { color: var(--accent); }
+  .hero-sub { margin-top: 2rem; max-width: 480px; color: var(--muted); font-size: 13px; line-height: 1.8; position: relative; z-index: 1; }
+  .hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; align-items: center; position: relative; z-index: 1; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; padding: 0.85rem 2rem; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s, transform 0.15s; text-decoration: none; display: inline-block; }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--muted); padding: 0.85rem 2rem; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; background: transparent; transition: border-color 0.2s, color 0.2s; text-decoration: none; display: inline-block; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
+  .hero-scroll { position: absolute; right: 3rem; bottom: 5rem; writing-mode: vertical-rl; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 1rem; }
+  .hero-scroll::after { content: ''; display: block; width: 1px; height: 48px; background: var(--muted); animation: scrollline 2s ease-in-out infinite; }
+  @keyframes scrollline { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+  /* SECTIONS */
+  section { padding: 7rem 3rem; border-top: 1px solid var(--border); }
+  .section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label span { color: var(--muted); font-size: 10px; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-title { font-family: 'DB Adman X', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+  .about-title em { font-style: normal; color: var(--accent); }
+  .about-body { color: var(--muted); font-size: 16px; line-height: 1.9; margin-bottom: 1rem; }
+  .stats-row { display: flex; gap: 2.5rem; margin-top: 2.5rem; }
+  .stat-num { font-family: 'DB Adman X', sans-serif; font-size: 2.5rem; color: var(--text); line-height: 1; }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.25rem; }
+  .about-img-wrap { background: var(--bg3); border: 1px solid var(--border); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; max-width: 70%; margin-left: auto; }
+  .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+  .about-img-wrap::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(226,75,74,0.15), transparent 60%); pointer-events: none; }
+  .about-placeholder { font-family: 'DB Adman X', sans-serif; font-size: 1rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.15); text-align: center; }
+  .about-placeholder small { display: block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; margin-top: 0.5rem; }
+  .about-corner { position: absolute; bottom: -1px; right: -1px; width: 40px; height: 40px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+  .project-card { background: var(--bg); padding: 2rem; position: relative; overflow: hidden; cursor: pointer; transition: background 0.3s; }
+  .project-card:hover { background: var(--bg3); }
+  .project-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.4s ease; }
+  .project-card:hover::after { width: 100%; }
+  .project-thumb { background: var(--bg3); aspect-ratio: 16/9; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .project-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .project-thumb-inner { font-size: 2rem; color: rgba(255,255,255,0.07); font-family: 'DB Adman X', sans-serif; }
+  .play-btn { position: absolute; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; }
+  .play-btn svg { width: 12px; height: 12px; fill: rgba(255,255,255,0.5); margin-left: 2px; }
+  .project-card:hover .play-btn { border-color: var(--accent); background: rgba(226,75,74,0.15); }
+  .project-card:hover .play-btn svg { fill: var(--accent); }
+  .project-cat { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .project-name { font-family: 'DB Adman X', sans-serif; font-size: 1.4rem; letter-spacing: 0.05em; color: var(--text); margin-bottom: 0.5rem; }
+  .project-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .project-meta { margin-top: 1.2rem; font-size: 10px; color: rgba(255,255,255,0.2); display: flex; justify-content: space-between; }
+
+  /* SKILLS */
+  .skills-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+  .skills-intro h2 { font-family: 'DB Adman X', sans-serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1; margin-bottom: 1rem; }
+  .skills-intro p { color: var(--muted); font-size: 12px; line-height: 1.9; }
+  .skill-item { padding: 1.25rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 1.5rem; }
+  .skill-item:first-child { border-top: 1px solid var(--border); }
+  .skill-name { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); min-width: 160px; }
+  .skill-bar-wrap { flex: 1; }
+  .skill-level { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-align: right; min-width: 80px; }
+  .skill-level.advanced { color: var(--accent); }
+  .skill-level.intermediate { color: rgba(226,75,74,0.6); }
+  .skill-level.basic { color: var(--muted); }
+
+  /* CONTACT */
+  .contact-inner { max-width: 640px; }
+  .contact-inner h2 { font-family: 'DB Adman X', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.95; margin-bottom: 2rem; }
+  .contact-inner h2 .outline { -webkit-text-stroke: 1px rgba(255,255,255,0.2); color: transparent; }
+  .contact-inner p { color: var(--muted); font-size: 13px; line-height: 1.9; margin-bottom: 2.5rem; }
+  .contact-link { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); transition: padding-left 0.25s; }
+  .contact-link:first-child { border-top: 1px solid var(--border); }
+  .contact-link:hover { padding-left: 0.75rem; }
+  .contact-link:hover .cl-label { color: var(--accent); }
+  .cl-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.2s; }
+  .cl-value { font-size: 12px; color: var(--muted); }
+
+  /* FOOTER */
+  footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'DB Adman X', sans-serif; font-size: 1.2rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); }
+  .footer-copy { font-size: 10px; color: rgba(255,255,255,0.15); }
+
+  .cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+
+  /* FILTER BAR */
+  .filter-bar { display: flex; gap: 0.75rem; margin-bottom: 3rem; }
+  .filter-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 0.5rem 1.5rem; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .filter-btn:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
+  .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(226,75,74,0.08); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; } nav ul { gap: 1.5rem; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid, .skills-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursor"></div>
+
+<!-- ============================================================
+     🔵 NAV BAR
+     Change "SUPAKORN.K" to your preferred short name/logo text
+     ============================================================ -->
+<nav>
+  <div class="nav-logo">SUPAKORN<span>.</span>K</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     🔴 HERO SECTION (the big first screen)
+     Change the tag line, your name display, and the short bio below
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+
+  <!-- 📝 Your job title tag -->
+  <div class="hero-tag">Video Editor &amp; Visual</div>
+
+  <!-- 📝 Your name — SUPAKORN is in red, KHAWPONG is outlined -->
+  <h1>
+    <span class="accent-name">SUPAKORN</span><br>
+    <span class="outline">KHAWPONG</span>
+  </h1>
+
+  <!-- 📝 One-line description of yourself -->
+  <p class="hero-sub">Crafting cinematic stories that move audiences — from live events to branded content, every cut has a purpose.</p>
+
+  <div class="hero-cta">
+    <a class="btn-primary" href="#work">View My Work</a>
+    <a class="btn-ghost" href="#contact">Get in Touch</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ============================================================
+     🟡 ABOUT SECTION
+     Change the bio paragraphs and your 3 stats below
+     ============================================================ -->
+<section id="about">
+  <div class="section-label">About Me <span>/ 01</span></div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-title">I Cut <em>Stories,</em><br>Not Just Footage.</h2>
+
+      <!-- 📝 Write about yourself here — change both paragraphs -->
+      <p class="about-body">
+        Hi, I'm Supakorn Khawpong — a Bangkok-based video editor and Visual Passionate about video editing and all forms of visual creation, I am always looking for opportunities to push my boundaries and elevate my craft.
+      </p>
+
+      <!-- 📝 Change the numbers and labels for your stats -->
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num">2<span>+</span></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📝 YOUR PHOTO — replace "YOUR-PHOTO.jpg" with your actual image filename
+         Put the image file in the same folder as this HTML file -->
+    <div>
+      <div class="about-img-wrap">
+        <img src="IMG_20251030_113152_743.webp" alt="Supakorn Khawpong">
+        <div class="about-corner"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     🟢 WORK / PROJECTS SECTION
+     Each "project-card" block = one project
+     Copy/paste a full project-card block to add more projects
+     ============================================================ -->
+<section id="work">
+  <div class="section-label">Selected Work <span>/ 02</span></div>
+
+  <!-- FILTER BUTTONS -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="visual">Visual</button>
+    <button class="filter-btn" data-filter="edit">Editor</button>
+  </div>
+
+  <!-- VISUAL SUBSECTION -->
+  <div class="section-label filter-heading" data-section="visual" style="color: var(--text); letter-spacing:0.2em;">Visual</div>
+  <div class="projects-grid" id="visual-grid">
+
+    <!-- PROJECT 1 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/eCST9R7Lf9M','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/eCST9R7Lf9M/maxresdefault.jpg" alt="Oventure - This is Moment" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">Oventure — This is Moment</div>
+      <p class="project-desc">For this video, I created almost everything myself, primarily using TouchDesigner. Integrating self-taught skills across After Effects, Premiere Pro, and TouchDesigner to bring it all together.</p>
+      <div class="project-meta">
+        <span>2026</span>
+        <span>PR / AE / TouchDesigner</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/oHtXArBBbzU','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/oHtXArBBbzU/maxresdefault.jpg" alt="Oventure - CHECK YOUR DNA" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">Oventure — CHECK YOUR DNA</div>
+      <p class="project-desc">This piece is definitely one of the coolest things I've made! I really love how it turned out. It was super challenging, which makes it even more special since it was my very first attempt.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 3 -->
+  <div class="project-card" onclick="window.open('https://youtu.be/tsH47wQCZOo','_blank')" style="cursor:pointer;">
+    <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/tsH47wQCZOo/maxresdefault.jpg" alt="ก็แค่พูดมา Three Man Down Visual" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+    </div>
+    <div class="project-cat">Visual</div>
+    <div class="project-name">ก็แค่พูดมา Three Man Down Visual</div>
+    <p class="project-desc">This visual started as a practice project, inspired by a song I really love. I put a lot of heart and effort into creating it.</p>
+    <div class="project-meta">
+        <span>2026</span>
+        <span>PR / AE </span>
+    </div>
+</div>
+
+    <!-- PROJECT 4 -->
+   <div class="project-card" onclick="window.open('https://youtu.be/HCwq12tEHHw','_blank')" style="cursor:pointer;">
+    <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/HCwq12tEHHw/maxresdefault.jpg" alt="QVINT Visual &quot;Greed&quot;" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+    </div>
+    <div class="project-cat">Visual</div>
+    <div class="project-name">QVINT Visual "Greed"</div>
+    <p class="project-desc">This visual was tailored for the song 'กรี๊ด' at an event. It features a custom-designed logo based on my interpretation of the song, complemented by a glitchy visual style.</p>
+    <div class="project-meta">
+        <span>2026</span>
+        <span>PR / AE / TouchDesigner</span>
+    </div>
+</div>
+
+    <!-- PROJECT 5 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/dkgi1za1Q_4','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/dkgi1za1Q_4/maxresdefault.jpg" alt="INTRO + Yoom QVINT" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">INTRO + Yoom QVINT</div>
+      <p class="project-desc">Another visual experiment I built from the ground up.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 6 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/8sM6Hnu_CII','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/8sM6Hnu_CII/maxresdefault.jpg" alt="What Do you want QVINT Visual" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">What Do you want QVINT Visual</div>
+      <p class="project-desc">Visual for QVINT</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 7 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/9LK66EESFyE','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/9LK66EESFyE/maxresdefault.jpg" alt="VISUAL สะลือสะลืม - SO QUIET" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">VISUAL สะลือสะลืม - SO QUIET</div>
+      <p class="project-desc">My first-ever 8-bit animation project, featuring a hand-drawn motion loop of a person lying in bed.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 8 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/BcLQK4Mvnow','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/BcLQK4Mvnow/maxresdefault.jpg" alt="ถ่าแหน่เด้อ - แดนสนถยา Visual" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">ถ่าแหน่เด้อ - แดนสนถยา Visual</div>
+      <p class="project-desc">Here's another visual I made just for fun, inspired by a song, as usual. I had a blast making it, and listening to the track really makes me miss home.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 9 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/_Sox5bmydmA','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/_Sox5bmydmA/maxresdefault.jpg" alt="Visual เพลง EDM" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">Visual เพลง EDM</div>
+      <p class="project-desc">This visual came to life when a senior of mine produced a track but didn't have any visuals for it, so he asked me to create them for him.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 10 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/S-cPd_FSpDQ','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/S-cPd_FSpDQ/maxresdefault.jpg" alt="LOOPMAIN NEXT WAVE" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">LOOPMAIN NEXT WAVE</div>
+      <p class="project-desc">The main looping visual designed for a client's 'Next Wave' project.</p>
+      <div class="project-meta"><span>2026</span><span>PR / PS</span></div>
+    </div>
+
+    <!-- PROJECT 11 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/ABjAU4IraSw','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/ABjAU4IraSw/maxresdefault.jpg" alt="LOOPMAIN ของ งานThe PARICH" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">LOOPMAIN ของ งานThe PARICH</div>
+      <p class="project-desc">A main looping visual designed and animated for a client's event.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AI / AE</span></div>
+    </div>
+
+    <!-- PROJECT 12 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/_pA8uQdNIrg','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/_pA8uQdNIrg/maxresdefault.jpg" alt="CMA37 LoopMain" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">CMA37 LoopMain</div>
+      <p class="project-desc">Main screen loop visual designed and animated for the CMA37 client project.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 13 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/Bp1S-CjdRoo','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/Bp1S-CjdRoo/maxresdefault.jpg" alt="LOOPMAIN CHINESE" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">LOOPMAIN CHINESE</div>
+      <p class="project-desc">A Chinese-themed main looping visual created for a client's event.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 14 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/LihyjZSDA38','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/LihyjZSDA38/maxresdefault.jpg" alt="Visual QVINT รักฉันเรียกว่าเธอ" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">Visual QVINT รักฉันเรียกว่าเธอ</div>
+      <p class="project-desc">I had the chance to create the visual for this song, and it turned out super cute! haha</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- PROJECT 15 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/j9G0lxQo0MQ','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/j9G0lxQo0MQ/maxresdefault.jpg" alt="ตกหลุมรัก Visual QVINT" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Visual</div>
+      <div class="project-name">ตกหลุมรัก Visual QVINT</div>
+      <p class="project-desc">VISUAL FOR QVINT</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+  </div>
+
+  <!-- EDITOR SUBSECTION -->
+  <div class="section-label filter-heading" data-section="edit" style="margin-top:4rem; color: var(--text); letter-spacing:0.2em;">Editor</div>
+  <div class="projects-grid" id="edit-grid">
+
+    <!-- EDIT 1 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/ISAD4CZhvOw','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/ISAD4CZhvOw/maxresdefault.jpg" alt="ลบยัง Mv Cover" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit</div>
+      <div class="project-name">ลบยัง Mv Cover</div>
+      <p class="project-desc">The 'ลบยัง' Cover MV was an insanely challenging project because it was my very first time doing CG! haha. I got the chance to experiment with so many new techniques. Hope you guys enjoy it!</p>
+      <div class="project-meta"><span>2025</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- EDIT 2 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/0skYg-RGOFQ','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/0skYg-RGOFQ/maxresdefault.jpg" alt="VTR SCHOOL" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit</div>
+      <div class="project-name">VTR SCHOOL</div>
+      <p class="project-desc">This video is a commissioned editing project for a client.</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- EDIT 3 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/VWYYiJoYQr8','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/VWYYiJoYQr8/maxresdefault.jpg" alt="ลงทุนวันนี้เพื่อผลประโยชน์ในวันหน้า" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit</div>
+      <div class="project-name">ลงทุนวันนี้เพื่อผลประโยชน์ในวันหน้า</div>
+      <p class="project-desc">This is another competition entry where I took on the roles of both director and editor.</p>
+      <div class="project-meta"><span>2024</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- EDIT 4 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/QVL-tNgxyBs','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/QVL-tNgxyBs/maxresdefault.jpg" alt="The Boxed - BLOCKBOX PROD." style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit</div>
+      <div class="project-name">The Boxed - BLOCKBOX PROD.</div>
+      <p class="project-desc">For this short film competition entry, I took on the roles of both Video Editor and Sound Designer.</p>
+      <div class="project-meta"><span>2025</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- EDIT 5 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/l_nl4hAYqig','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/l_nl4hAYqig/maxresdefault.jpg" alt="VLOG DISNEY ลูกค้า" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit</div>
+      <div class="project-name">VLOG DISNEY ลูกค้า</div>
+      <p class="project-desc">A Disney VLOG project where I was commissioned by a client for the video editing.</p>
+      <div class="project-meta"><span>2024</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- EDIT 6 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/9B248gryX34','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/9B248gryX34/maxresdefault.jpg" alt="MAKE FRIENDS EP.3 | พบกับ D GERRARD เจ้าของเพลงสุดฮิต" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit / Camera</div>
+      <div class="project-name">MAKE FRIENDS EP.3 | พบกับ D GERRARD เจ้าของเพลงสุดฮิต</div>
+      <p class="project-desc">During my internship, I had the opportunity to both film and edit this project.</p>
+      <div class="project-meta"><span>2024</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- EDIT 7 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/gRetXEkI0lY','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/gRetXEkI0lY/maxresdefault.jpg" alt="MAKE FRIENDS EP.4 | ช่วงโปรโมชั่น...แฉวีรกรรมแสบ ที่ไม่มีใครเคยรู้!!" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit / Camera</div>
+      <div class="project-name">MAKE FRIENDS EP.4 | ช่วงโปรโมชั่น...แฉวีรกรรมแสบ ที่ไม่มีใครเคยรู้!!</div>
+      <p class="project-desc">This was the very first project I worked on at the start of my internship.</p>
+      <div class="project-meta"><span>2024</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- EDIT 8 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/HI2IuMWLQJs','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/HI2IuMWLQJs/maxresdefault.jpg" alt="MAKE FRIENDS EP.5 | เจ้าของเพลง เผื่อวันไหนเธอจะกลับมา" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit</div>
+      <div class="project-name">MAKE FRIENDS EP.5 | เจ้าของเพลง "เผื่อวันไหนเธอจะกลับมา"</div>
+      <p class="project-desc">This is one of my favorite projects because I had the opportunity to edit for an artist I truly admire.</p>
+      <div class="project-meta"><span>2024</span><span>PR / AE</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     🔵 SKILLS SECTION
+     Change the skill name and the percentage (data-w and the display text)
+     Example: data-w="85%" and <span>85%</span> must match
+     ============================================================ -->
+<section id="skills">
+  <div class="section-label">Skills &amp; Tools <span>/ 03</span></div>
+  <div class="skills-layout">
+    <div class="skills-intro">
+      <h2>What I Bring<br>to the Edit.</h2>
+      <p>A full toolkit spanning editing, color, motion, and live production — built over years of real-world projects.</p>
+    </div>
+    <div id="skills-list">
+
+      <!-- 📝 Each row = one skill. Change the name, data-w percentage, and display % -->
+      <div class="skill-item">
+        <span class="skill-name">Adobe Premiere Pro</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level advanced">Advanced</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">After Effects</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level intermediate">Intermediate</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Photoshop</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level intermediate">Intermediate</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Resolume Arena</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level intermediate">Intermediate</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">DaVinci Resolve</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level basic">Basic</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Color Grading</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level basic">Basic</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Motion Graphics</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level basic">Basic</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Sound Design</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level basic">Basic</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">TouchDesigner</span>
+        <div class="skill-bar-wrap"></div>
+        <span class="skill-level basic">Basic</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     🟠 CONTACT SECTION
+     Change your email, Instagram, Vimeo, and LinkedIn links
+     For href: use "mailto:your@email.com" for email
+               use the full URL for social links
+     ============================================================ -->
+<section id="contact">
+  <div class="section-label">Contact <span>/ 04</span></div>
+  <div class="contact-inner">
+    <h2>LET'S<br>MAKE<br><span class="outline">SOMETHING.</span></h2>
+
+    <!-- 📝 Change this short paragraph -->
+    <p>Available for freelance projects, collaborations, and full-time opportunities. Based in Bangkok — open to remote work worldwide.</p>
+
+    <div>
+      <!-- 📝 Change href and the display text for each contact link -->
+      <a class="contact-link" href="mailto:xooxrn.work@gmail.com">
+        <span class="cl-label">Email</span>
+        <span class="cl-value">xooxrn.work@gmail.com</span>
+        <span>→</span>
+      </a>
+      <a class="contact-link" href="https://www.instagram.com/xo_oxrn/" target="_blank">
+        <span class="cl-label">Instagram</span>
+        <span class="cl-value">@xo_oxrn</span>
+        <span>→</span>
+      </a>
+      <a class="contact-link" href="https://www.facebook.com/supakorn.khawpong/?locale=th_TH" target="_blank">
+        <span class="cl-label">Facebook</span>
+        <span class="cl-value">Supakorn Khawpong</span>
+        <span>→</span>
+      </a>
+      <a class="contact-link" href="tel:0611823725">
+        <span class="cl-label">Phone</span>
+        <span class="cl-value">061-182-3725</span>
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SUPAKORN KHAWPONG</div>
+  <div class="footer-copy">© 2026 — Video Editor & Visual, Bangkok</div>
+</footer>
+
+<script>
+  // Custom cursor dot — desktop only
+  const cursor = document.getElementById('cursor');
+  if (window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+  } else {
+    cursor.style.display = 'none';
+  }
+
+  // Filter buttons
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const visualGrid = document.getElementById('visual-grid');
+  const editGrid = document.getElementById('edit-grid');
+  const headings = document.querySelectorAll('.filter-heading');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+
+      if (filter === 'all') {
+        visualGrid.style.display = 'grid';
+        editGrid.style.display = 'grid';
+        headings.forEach(h => h.style.display = 'flex');
+      } else if (filter === 'visual') {
+        visualGrid.style.display = 'grid';
+        editGrid.style.display = 'none';
+        headings.forEach(h => h.style.display = h.dataset.section === 'visual' ? 'flex' : 'none');
+      } else if (filter === 'edit') {
+        visualGrid.style.display = 'none';
+        editGrid.style.display = 'grid';
+        headings.forEach(h => h.style.display = h.dataset.section === 'edit' ? 'flex' : 'none');
+      }
+    });
+  });
+
+  // Skill bars animate when scrolled into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+          bar.style.width = bar.dataset.w;
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const skillsList = document.getElementById('skills-list');
+  if (skillsList) observer.observe(skillsList);
+</script>
+</body>
+</html>
