@@ -7,11 +7,7 @@
 <!-- ============================================================
      SUPAKORN KHAWPONG — PORTFOLIO WEBSITE
      ============================================================
-     HOW TO EDIT THIS FILE:
-     1. Open this file in any text editor (Notepad, VS Code, etc.)
-     2. Find the section you want to change using the comments below
-     3. Save the file and open it in your browser to see changes
-     ============================================================ -->
+        ============================================================ -->
 
 <title>Supakorn Khawpong — Video Editor</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -141,47 +137,11 @@
   .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(226,75,74,0.08); }
 
   @media (max-width: 768px) {
-    /* NAV */
-    nav { padding: 1rem 1.5rem; }
-    nav ul { gap: 1rem; }
-    nav ul li a { font-size: 10px; }
-
-    /* HERO */
-    .hero { padding: 0 1.5rem 4rem; }
-    .hero h1 { font-size: clamp(2.8rem, 14vw, 5rem); }
-    .hero-sub { font-size: 12px; }
-    .hero-cta { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-    .btn-primary, .btn-ghost { width: 100%; text-align: center; }
-    .hero-scroll { display: none; }
-
-    /* SECTIONS */
-    section { padding: 4rem 1.5rem; }
-
-    /* ABOUT */
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .about-img-wrap { max-width: 100%; margin-left: 0; }
-
-    /* SKILLS */
-    .skills-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .skill-name { min-width: 120px; font-size: 10px; }
-
-    /* PROJECTS */
+    nav { padding: 1rem 1.5rem; } nav ul { gap: 1.5rem; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid, .skills-layout { grid-template-columns: 1fr; gap: 3rem; }
     .projects-grid { grid-template-columns: 1fr; }
-    .filter-bar { flex-wrap: wrap; gap: 0.5rem; }
-    .filter-btn { flex: 1; text-align: center; padding: 0.5rem 1rem; }
-
-    /* CONTACT */
-    .contact-link { padding: 1rem 0.75rem; }
-    .cl-value { font-size: 11px; }
-
-    /* FOOTER */
     footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
-  }
-
-  @media (max-width: 400px) {
-    nav ul { gap: 0.6rem; }
-    nav ul li a { font-size: 9px; letter-spacing: 0.08em; }
-    .hero h1 { font-size: clamp(2.4rem, 13vw, 3.5rem); }
   }
 </style>
 </head>
@@ -573,6 +533,18 @@
       <div class="project-name">MAKE FRIENDS EP.5 | เจ้าของเพลง "เผื่อวันไหนเธอจะกลับมา"</div>
       <p class="project-desc">This is one of my favorite projects because I had the opportunity to edit for an artist I truly admire.</p>
       <div class="project-meta"><span>2024</span><span>PR / AE</span></div>
+    </div>
+
+    <!-- EDIT 9 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/rKiSoE0aMr0','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/rKiSoE0aMr0/maxresdefault.jpg" alt="เที่ยวเมืองออสโลกับซีซีน 3วัน 2คืน 🇳🇴" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit</div>
+      <div class="project-name">เที่ยวเมืองออสโลกับซีซีน 3วัน 2คืน 🇳🇴</div>
+      <p class="project-desc">I just tried long-form editing for the first time and realized it's exactly what I want to do. Can't wait for the next one!</p>
+      <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
     </div>
 
   </div>
