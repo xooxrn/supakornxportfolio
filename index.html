@@ -42,7 +42,46 @@
 
   /* HERO */
   .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 3rem 5rem; position: relative; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(226,75,74,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(226,75,74,0.06) 0%, transparent 60%); }
+  /* HERO ANIMATIONS */
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(226,75,74,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(226,75,74,0.06) 0%, transparent 60%); animation: bgpulse 8s ease-in-out infinite; }
+  @keyframes bgpulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  /* PARTICLES */
+  .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .particle { position: absolute; width: 2px; height: 2px; background: var(--accent); border-radius: 50%; opacity: 0; animation: float linear infinite; }
+  @keyframes float {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+  }
+
+  /* GLITCH TEXT */
+  .accent-name { position: relative; }
+  .accent-name::before, .accent-name::after {
+    content: attr(data-text);
+    position: absolute; left: 0; top: 0;
+    color: var(--accent);
+    clip-path: inset(0 0 0 0);
+  }
+  .accent-name::before { animation: glitch1 5s infinite; color: rgba(226,75,74,0.6); }
+  .accent-name::after { animation: glitch2 5s infinite; color: rgba(100,200,255,0.4); }
+  @keyframes glitch1 {
+    0%, 90%, 100% { clip-path: inset(100% 0 0 0); transform: translate(0); }
+    92% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 0); }
+    94% { clip-path: inset(60% 0 10% 0); transform: translate(3px, 0); }
+    96% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 0); }
+  }
+  @keyframes glitch2 {
+    0%, 88%, 100% { clip-path: inset(100% 0 0 0); transform: translate(0); }
+    90% { clip-path: inset(10% 0 70% 0); transform: translate(3px, 0); }
+    93% { clip-path: inset(50% 0 20% 0); transform: translate(-3px, 0); }
+    95% { clip-path: inset(30% 0 50% 0); transform: translate(2px, 0); }
+  }
+
+  /* SCANLINE */
+  .hero-scanline { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 3px); animation: scanmove 8s linear infinite; }
+  @keyframes scanmove { 0% { background-position: 0 0; } 100% { background-position: 0 100px; } }
   .hero-lines { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.025) 80px); }
   .hero-tag { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
   .hero-tag::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
@@ -202,7 +241,7 @@
      Change "SUPAKORN.K" to your preferred short name/logo text
      ============================================================ -->
 <nav>
-  <div class="nav-logo">SUPAKORN<span>.</span>K</div>
+  <a href="#home" style="text-decoration:none; color:inherit;"><div class="nav-logo">SUPAKORN<span>.</span>K</div></a>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
@@ -218,13 +257,15 @@
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-lines"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-scanline"></div>
 
   <!-- 📝 Your job title tag -->
-  <div class="hero-tag">Video Editor &amp; Visual</div>
+  <div class="hero-tag">Video Editor &amp; Visual Designer / Operator</div>
 
   <!-- 📝 Your name — SUPAKORN is in red, KHAWPONG is outlined -->
   <h1>
-    <span class="accent-name">SUPAKORN</span><br>
+    <span class="accent-name" data-text="SUPAKORN">SUPAKORN</span><br>
     <span class="outline">KHAWPONG</span>
   </h1>
 
@@ -304,7 +345,7 @@
 
       <!-- 📝 Write about yourself here — change both paragraphs -->
       <p class="about-body">
-        Hi, I'm Supakorn Khawpong — a Bangkok-based video editor and Visual Passionate about video editing and all forms of visual creation, I am always looking for opportunities to push my boundaries and elevate my craft.
+        Hi, I'm Supakorn Khawpong — a Bangkok-based Video Editor and Visual Designer / Operator. Passionate about video editing and all forms of visual creation, I'm always looking for opportunities to push my boundaries and elevate my craft.
       </p>
 
       <!-- 📝 Change the numbers and labels for your stats -->
@@ -769,7 +810,8 @@
      For href: use "mailto:your@email.com" for email
                use the full URL for social links
      ============================================================ -->
-<section id="contact">
+<section id="contact" style="position:relative; overflow:hidden;">
+  <div class="hero-particles" id="particles-contact"></div>
   <div class="section-label">Contact <span>/ 04</span></div>
   <div class="contact-inner">
     <h2>LET'S<br>MAKE<br><span class="outline">SOMETHING.</span></h2>
@@ -806,10 +848,36 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">SUPAKORN KHAWPONG</div>
-  <div class="footer-copy">© 2026 — Video Editor & Visual, Bangkok</div>
+  <div class="footer-copy">© 2026 — Video Editor & Visual Designer / Operator, Bangkok</div>
 </footer>
 
 <script>
+  // Generate particles for contact section
+  const contactContainer = document.getElementById('particles-contact');
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (Math.random() * 2 + 1) + 'px';
+    p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.opacity = Math.random() * 0.5;
+    contactContainer.appendChild(p);
+  }
+
+  // Generate particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (Math.random() * 2 + 1) + 'px';
+    p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.opacity = Math.random() * 0.5;
+    container.appendChild(p);
+  }
+
   // Custom cursor dot — desktop only
   const cursor = document.getElementById('cursor');
   if (window.matchMedia('(pointer: fine)').matches) {
