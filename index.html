@@ -4,12 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ============================================================
-     SUPAKORN KHAWPONG — PORTFOLIO WEBSITE
-     ============================================================
-          ============================================================ -->
+<!-- SEO Meta Tags -->
+<title>Supakorn Khawpong — Video Editor & Visual Designer</title>
+<meta name="description" content="Bangkok-based Video Editor & Visual Designer / Operator. Specializing in visual content, event visuals, and post-production.">
+<meta name="keywords" content="video editor, visual designer, VJ, Bangkok, Resolume, After Effects, Premiere Pro, motion graphics">
+<meta name="author" content="Supakorn Khawpong">
+<meta name="robots" content="index, follow">
 
-<title>Supakorn Khawpong — Video Editor</title>
+<!-- Open Graph (Facebook, LINE, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Supakorn Khawpong — Video Editor & Visual Designer">
+<meta property="og:description" content="Bangkok-based Video Editor & Visual Designer / Operator. I Edit Films. Design Visuals. Tell Stories.">
+<meta property="og:image" content="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/img_20251030_113152_743.webp">
+<meta property="og:url" content="https://supakornxportfolio.vercel.app">
+<meta property="og:site_name" content="Supakorn Khawpong Portfolio">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Supakorn Khawpong — Video Editor & Visual Designer">
+<meta name="twitter:description" content="Bangkok-based Video Editor & Visual Designer / Operator.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/img_20251030_113152_743.webp">
+
+<!-- Favicon (SVG inline) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' fill='%23E24B4A'>Z</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' fill='%23E24B4A'>Z</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   @font-face {
@@ -30,7 +48,27 @@
     --muted: #888;
   }
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.7; overflow-x: hidden; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeSpeed; }
+
+  /* PERFORMANCE: content-visibility for off-screen sections */
+  section { content-visibility: auto; contain-intrinsic-size: 0 600px; }
+
+  /* PERFORMANCE: reduced motion for accessibility + low-end devices */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .reveal, .reveal-left, .reveal-right { opacity: 1 !important; transform: none !important; }
+    .particle { display: none; }
+    .noise { display: none; }
+  }
+
+  /* PERFORMANCE: reduce effects on mobile */
+  @media (max-width: 768px) {
+    .noise { display: none; }
+    .hero-scanline { display: none; }
+    .particle { animation-duration: 15s; }
+    * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    nav, .project-card, .filter-btn, .contact-link, .btn-ghost { background: rgba(10,10,10,0.95) !important; }
+  }
 
   /* NAV */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
@@ -126,6 +164,7 @@
   .project-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.4s ease; }
   .project-card:hover::after { width: 100%; }
   .project-thumb { background: var(--bg3); aspect-ratio: 16/9; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .project-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .project-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .project-thumb-inner { font-size: 2rem; color: rgba(255,255,255,0.07); font-family: 'DB Adman X', sans-serif; }
   .play-btn { position: absolute; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; }
@@ -136,6 +175,37 @@
   .project-name { font-family: 'DB Adman X', sans-serif; font-size: 1.4rem; letter-spacing: 0.05em; color: var(--text); margin-bottom: 0.5rem; }
   .project-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
   .project-meta { margin-top: 1.2rem; font-size: 10px; color: rgba(255,255,255,0.2); display: flex; justify-content: space-between; }
+
+  /* SCROLL PROGRESS BAR */
+  #progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 9999; width: 0%; transition: width 0.1s linear; box-shadow: 0 0 8px var(--accent); }
+
+  /* ACTIVE NAV */
+  nav ul li a.active { color: var(--accent); }
+  nav ul li a.active::after { content: ''; display: block; width: 100%; height: 1px; background: var(--accent); margin-top: 2px; }
+
+  /* PROJECT CARD HOVER OVERLAY */
+  .card-overlay { position: absolute; inset: 0; background: rgba(226,75,74,0.85); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+  .card-overlay span { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; }
+  .project-card:hover .card-overlay { opacity: 1; }
+
+  /* TYPING CURSOR */
+  .typing-cursor { display: inline-block; width: 3px; height: 0.85em; background: var(--accent); margin-left: 4px; animation: blink 0.8s step-end infinite; vertical-align: middle; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  /* SCROLL REVEAL ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(40px) translateZ(0); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); will-change: opacity, transform; }
+  .reveal.visible { opacity: 1; transform: translateY(0) translateZ(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px) translateZ(0); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); will-change: opacity, transform; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0) translateZ(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px) translateZ(0); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); will-change: opacity, transform; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0) translateZ(0); }
+  .reveal-stagger > * { opacity: 0; transform: translateY(30px) translateZ(0); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); will-change: opacity, transform; }
+  .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0) translateZ(0); transition-delay:0s; }
+  .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0) translateZ(0); transition-delay:0.08s; }
+  .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0) translateZ(0); transition-delay:0.16s; }
+  .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0) translateZ(0); transition-delay:0.24s; }
+  .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0) translateZ(0); transition-delay:0.32s; }
+  .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0) translateZ(0); transition-delay:0.40s; }
+  .reveal-stagger.visible > *:nth-child(n+7) { opacity:1; transform:translateY(0) translateZ(0); transition-delay:0.48s; }
 
   /* SKILLS */
   .skills-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
@@ -210,7 +280,64 @@
     #scroll-btn { width: 38px; height: 38px; right: 1rem; bottom: 1.5rem; }
   }
 
-  /* ── SMALL MOBILE (400px) ── */
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .timeline-item { position: relative; padding-bottom: 2.5rem; }
+  .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--border); border: 1px solid var(--border); transition: background 0.3s; }
+  .timeline-item:hover::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px rgba(226,75,74,0.4); }
+  .timeline-year { font-size: 10px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 0.3rem; }
+  .timeline-title { font-family: 'DB Adman X', sans-serif; font-size: 1.2rem; color: var(--text); margin-bottom: 0.25rem; }
+  .timeline-role { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .timeline-desc { font-size: 11px; color: var(--muted); line-height: 1.8; }
+  .timeline-tag { display: inline-block; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); padding: 0.2rem 0.6rem; margin-top: 0.5rem; margin-right: 0.3rem; }
+  .search-wrap { margin-bottom: 1.5rem; position: relative; display: inline-block; }
+  .search-input { width: 100%; max-width: 320px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: var(--text); padding: 0.6rem 1rem 0.6rem 2.5rem; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; outline: none; transition: border-color 0.2s; backdrop-filter: blur(8px); }
+  .search-input::placeholder { color: var(--muted); }
+  .search-input:focus { border-color: rgba(226,75,74,0.4); }
+  .search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 12px; pointer-events: none; }
+  .search-no-result { display: none; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; padding: 2rem 0; text-transform: uppercase; }
+
+  /* NOISE TEXTURE OVERLAY */
+  .noise { position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 200px 200px; animation: grain 0.5s steps(1) infinite; }
+  @keyframes grain { 0% { transform: translate(0, 0); } 10% { transform: translate(-2%, -3%); } 20% { transform: translate(3%, 2%); } 30% { transform: translate(-1%, 4%); } 40% { transform: translate(4%, -1%); } 50% { transform: translate(-3%, 3%); } 60% { transform: translate(2%, -4%); } 70% { transform: translate(-4%, 1%); } 80% { transform: translate(3%, -2%); } 90% { transform: translate(-2%, 4%); } 100% { transform: translate(1%, -3%); } }
+  #preloader { position: fixed; inset: 0; background: var(--bg); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: opacity 0.6s ease, visibility 0.6s ease; }
+  #preloader.hide { opacity: 0; visibility: hidden; }
+  .preloader-logo { font-family: 'DB Adman X', sans-serif; font-size: 2.5rem; letter-spacing: 0.1em; color: var(--text); }
+  .preloader-logo span { color: var(--accent); }
+  .preloader-bar-wrap { width: 160px; height: 1px; background: rgba(255,255,255,0.1); overflow: hidden; }
+  .preloader-bar { height: 100%; background: var(--accent); width: 0%; animation: preload 1.4s cubic-bezier(0.16,1,0.3,1) forwards; box-shadow: 0 0 8px var(--accent); }
+  @keyframes preload { 0% { width: 0%; } 100% { width: 100%; } }
+  .preloader-text { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; }
+
+  /* LAZY LOAD IMAGES */
+  img.lazy { opacity: 0; transition: opacity 0.5s ease; }
+  img.lazy.loaded { opacity: 1; }
+
+  /* SHARE BUTTON */
+  .share-btn { position: fixed; bottom: 9rem; right: 1.5rem; z-index: 500; width: 44px; height: 44px; background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); transition: all 0.25s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); }
+  .share-btn:hover { background: rgba(226,75,74,0.15); border-color: rgba(226,75,74,0.4); color: var(--accent); }
+  .share-toast { position: fixed; bottom: 13.5rem; right: 1rem; background: rgba(226,75,74,0.95); color: #fff; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; padding: 0.5rem 1rem; opacity: 0; transform: translateY(8px); transition: all 0.3s; pointer-events: none; z-index: 600; white-space: nowrap; }
+
+  /* HAMBURGER MENU */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; z-index: 200; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 300px; height: 100vh; background: rgba(10,10,10,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-left: 1px solid rgba(255,255,255,0.06); z-index: 150; display: flex; flex-direction: column; justify-content: center; padding: 3rem 2.5rem; transition: right 0.4s cubic-bezier(0.16,1,0.3,1); }
+  .mobile-menu.open { right: 0; }
+  .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 2rem; }
+  .mobile-menu ul li a { font-family: 'DB Adman X', sans-serif; font-size: 2rem; letter-spacing: 0.05em; color: var(--text); text-decoration: none; transition: color 0.2s; }
+  .mobile-menu ul li a:hover { color: var(--accent); }
+  .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 140; display: none; }
+  .mobile-menu-overlay.open { display: block; }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .hamburger { display: flex; }
+  }
   @media (max-width: 400px) {
     nav ul { gap: 0.5rem; }
     nav ul li a { font-size: 8px; letter-spacing: 0.05em; }
@@ -234,6 +361,13 @@
 </head>
 <body>
 
+<div class="noise"></div>
+<div id="preloader">
+  <div class="preloader-logo">SUPAKORN<span>.</span>K</div>
+  <div class="preloader-bar-wrap"><div class="preloader-bar"></div></div>
+  <div class="preloader-text">Loading Portfolio...</div>
+</div>
+<div id="progress-bar"></div>
 <div class="cursor-dot" id="cursor"></div>
 
 <!-- ============================================================
@@ -246,9 +380,25 @@
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="#about" onclick="toggleMenu()">About</a></li>
+    <li><a href="#work" onclick="toggleMenu()">Work</a></li>
+    <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+    <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+  </ul>
+</div>
 
 <!-- ============================================================
      🔴 HERO SECTION (the big first screen)
@@ -270,7 +420,7 @@
   </h1>
 
   <!-- 📝 One-line description of yourself -->
-  <p class="hero-sub">WELCOME TO ZO WORK PLEASE ENJOY</p>
+  <p class="hero-sub"><span id="typing-text"></span><span class="typing-cursor"></span></p>
 
   <div class="hero-cta">
     <a class="btn-primary" href="#work">View My Work</a>
@@ -333,13 +483,24 @@
   </svg>
 </a>
 
+<!-- SHARE BUTTON -->
+<div class="share-toast" id="share-toast">LINK COPIED!</div>
+<button class="share-btn" onclick="sharePortfolio()" title="Share">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <circle cx="11" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="11" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="3" cy="7" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9.5 3.5L4.5 6.5M4.5 7.5L9.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+</button>
+
 <!-- ============================================================
      🟡 ABOUT SECTION
      Change the bio paragraphs and your 3 stats below
      ============================================================ -->
 <section id="about">
-  <div class="section-label">About Me <span>/ 01</span></div>
-  <div class="about-grid">
+  <div class="section-label reveal">About Me <span>/ 01</span></div>
+  <div class="about-grid reveal">
     <div>
       <h2 class="about-title">I Edit <em style="color:var(--accent);font-style:normal;">Films.</em> Design <em style="color:var(--accent);font-style:normal;">Visuals.</em><br>Tell Stories.</h2>
 
@@ -374,13 +535,21 @@
      Copy/paste a full project-card block to add more projects
      ============================================================ -->
 <section id="work">
-  <div class="section-label">Selected Work <span>/ 02</span></div>
+  <div class="section-label reveal">Selected Work <span>/ 02</span></div>
+
+  <!-- SEARCH BOX -->
+  <div class="search-wrap reveal">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search-input" type="text" placeholder="Search projects...">
+  </div>
+  <div class="search-no-result" id="search-no-result">No projects found</div>
 
   <!-- FILTER BUTTONS -->
-  <div class="filter-bar">
+  <div class="filter-bar reveal">
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="visual">Visual</button>
     <button class="filter-btn" data-filter="edit">Editor</button>
+    <button class="filter-btn" data-filter="photography">Photography</button>
     <button class="filter-btn" data-filter="photo">Other</button>
   </div>
 
@@ -691,6 +860,48 @@
       <div class="project-meta"><span>2026</span><span>PR / AE</span></div>
     </div>
 
+    <!-- EDIT 10 -->
+    <div class="project-card" onclick="window.open('https://youtu.be/RcCRKHR3fco','_blank')" style="cursor:pointer;">
+      <div class="project-thumb">
+        <img src="https://img.youtube.com/vi/RcCRKHR3fco/maxresdefault.jpg" alt="แล่น - PARADOX l [Unofficial MV] By มนุษย์หนัง Production" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></div>
+      </div>
+      <div class="project-cat">Edit</div>
+      <div class="project-name">แล่น - PARADOX l [Unofficial MV] By มนุษย์หนัง Production</div>
+      <p class="project-desc">Excited to have been part of the post-production team as Editor 2. My main focus was supporting the senior editors with CG elements and creative edits to bring this PARADOX MV to life. It was an incredible learning experience collaborating with such a talented team.</p>
+      <div class="project-meta"><span>2025</span><span>PR / AE</span></div>
+    </div>
+
+  </div>
+
+  <!-- PHOTOGRAPHY SUBSECTION -->
+  <div class="section-label filter-heading" data-section="photography" style="margin-top:4rem; color: var(--text); letter-spacing:0.2em;">Photography</div>
+  <div class="projects-grid" id="photography-grid">
+
+    <!-- FASHION ALBUM -->
+    <div class="project-card album-card" onclick="openAlbum('fashion')" style="cursor:pointer;">
+      <div class="project-thumb" style="overflow:hidden;">
+        <img src="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/675930213_1748709696505577_2342924610634858975_n.jpg" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;bottom:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);padding:0.25rem 0.6rem;font-size:10px;letter-spacing:0.1em;color:#fff;backdrop-filter:blur(4px);">6 PHOTOS</div>
+      </div>
+      <div class="project-cat">Photography</div>
+      <div class="project-name">Fashion</div>
+      <p class="project-desc">A fashion photography series.</p>
+      <div class="project-meta"><span>2026</span><span>Photography</span></div>
+    </div>
+
+    <!-- FOOD ALBUM -->
+    <div class="project-card album-card" onclick="openAlbum('food')" style="cursor:pointer;">
+      <div class="project-thumb" style="overflow:hidden;">
+        <img src="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_1184.jpg" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;bottom:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);padding:0.25rem 0.6rem;font-size:10px;letter-spacing:0.1em;color:#fff;backdrop-filter:blur(4px);">8 PHOTOS</div>
+      </div>
+      <div class="project-cat">Photography</div>
+      <div class="project-name">Food</div>
+      <p class="project-desc">A food photography series.</p>
+      <div class="project-meta"><span>2026</span><span>Photography</span></div>
+    </div>
+
   </div>
 
   <!-- PHOTO SUBSECTION -->
@@ -704,7 +915,7 @@
         <div style="position:absolute;bottom:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);padding:0.25rem 0.6rem;font-size:10px;letter-spacing:0.1em;color:#fff;backdrop-filter:blur(4px);">14 PHOTOS</div>
       </div>
       <div class="project-cat">Album</div>
-      <div class="project-name">Visual Work</div>
+      <div class="project-name">Event Work</div>
       <p class="project-desc">Behind the scenes from Visual projects.</p>
       <div class="project-meta"><span>2025–2026</span><span>Work</span></div>
     </div>
@@ -712,8 +923,8 @@
     <!-- ALBUM 2 -->
     <div class="project-card album-card" onclick="openAlbum('edit-work')" style="cursor:pointer;">
       <div class="project-thumb" style="overflow:hidden;">
-        <img src="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-41-35-616_com.instagram.android-edit.jpg" style="width:100%;height:100%;object-fit:cover;">
-        <div style="position:absolute;bottom:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);padding:0.25rem 0.6rem;font-size:10px;letter-spacing:0.1em;color:#fff;backdrop-filter:blur(4px);">10 PHOTOS</div>
+        <img src="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20260419_001556.jpg" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;bottom:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);padding:0.25rem 0.6rem;font-size:10px;letter-spacing:0.1em;color:#fff;backdrop-filter:blur(4px);">11 PHOTOS</div>
       </div>
       <div class="project-cat">Album</div>
       <div class="project-name">Edit Work</div>
@@ -721,10 +932,20 @@
       <div class="project-meta"><span>2024–2026</span><span>Work</span></div>
     </div>
 
+    <!-- ALBUM 3 -->
+    <div class="project-card album-card" onclick="openAlbum('production-work')" style="cursor:pointer;">
+      <div class="project-thumb" style="overflow:hidden;">
+        <img src="https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/DSC07709.JPG" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;bottom:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);padding:0.25rem 0.6rem;font-size:10px;letter-spacing:0.1em;color:#fff;backdrop-filter:blur(4px);">10 PHOTOS</div>
+      </div>
+      <div class="project-cat">Album</div>
+      <div class="project-name">Production Work</div>
+      <p class="project-desc">Behind the scenes from Production projects.</p>
+      <div class="project-meta"><span>2024–2026</span><span>Work</span></div>
+    </div>
+
   </div>
 </section>
-
-<!-- ALBUM OVERLAY -->
 <div id="album-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; overflow-y:auto; padding:2rem;">
   <div style="max-width:1200px; margin:0 auto;">
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;">
@@ -745,8 +966,8 @@
   <div id="lightbox-caption" style="margin-top:1rem; font-size:11px; letter-spacing:0.15em; color:rgba(255,255,255,0.4); text-transform:uppercase;"></div>
 </div>
 <section id="skills">
-  <div class="section-label">Skills &amp; Tools <span>/ 03</span></div>
-  <div class="skills-layout">
+  <div class="section-label reveal">Skills &amp; Tools <span>/ 03</span></div>
+  <div class="skills-layout reveal">
     <div class="skills-intro">
       <h2>What I Bring<br>to the Edit.</h2>
       <p>A full toolkit spanning editing, color, motion, and live production — built over years of real-world projects.</p>
@@ -804,6 +1025,104 @@
   </div>
 </section>
 
+</section>
+
+<!-- ============================================================
+     🟡 EXPERIENCE / TIMELINE SECTION
+     ============================================================ -->
+<section id="experience">
+  <div class="section-label reveal">Experience <span>/ 03.5</span></div>
+  <div class="skills-layout reveal">
+
+    <!-- INTERNSHIP -->
+    <div>
+      <h3 style="font-family:'DB Adman X',sans-serif; font-size:1.1rem; letter-spacing:0.1em; color:var(--muted); margin-bottom:2rem; text-transform:uppercase;">Internship</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2021</div>
+          <div class="timeline-title">DGY - DooGunYoung</div>
+          <div class="timeline-role">Editor / Camera</div>
+          <div class="timeline-desc">Internship in video editing and camera operation.</div>
+          <span class="timeline-tag">Editor</span>
+          <span class="timeline-tag">Camera</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FREELANCE & EVENT -->
+    <div>
+      <h3 style="font-family:'DB Adman X',sans-serif; font-size:1.1rem; letter-spacing:0.1em; color:var(--muted); margin-bottom:2rem; text-transform:uppercase;">Freelance & Event Visual</h3>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-title">SAVELLA CLINIC</div>
+          <div class="timeline-role">Freelance Editor</div>
+          <div class="timeline-desc">Edited atmosphere and promotional clips for the clinic's social media.</div>
+          <span class="timeline-tag">Freelance</span>
+          <span class="timeline-tag">Editor</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-title">NEXTWAVE SOLUTION DAY</div>
+          <div class="timeline-role">Event Visual Operator</div>
+          <div class="timeline-desc">Operated screen and designed visuals for the event.</div>
+          <span class="timeline-tag">Event Visual</span>
+          <span class="timeline-tag">Operator</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-title">Parich The New Era</div>
+          <div class="timeline-role">Event Visual Operator</div>
+          <div class="timeline-desc">Operated screen and designed visuals for the event.</div>
+          <span class="timeline-tag">Event Visual</span>
+          <span class="timeline-tag">Operator</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-title">Bank PII VLOG</div>
+          <div class="timeline-role">Freelance Editor</div>
+          <div class="timeline-desc">Edited travel VLOG — เที่ยวเมืองออสโลกับซีซัน 3 วัน 2 คืน.</div>
+          <span class="timeline-tag">Freelance</span>
+          <span class="timeline-tag">Editor</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-title">QPM</div>
+          <div class="timeline-role">Event Visual Operator</div>
+          <div class="timeline-desc">Operated screen and designed visuals for the event.</div>
+          <span class="timeline-tag">Event Visual</span>
+          <span class="timeline-tag">Operator</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-title">PAY SOLUTION DAY</div>
+          <div class="timeline-role">Event Visual Operator</div>
+          <div class="timeline-desc">Operated screen and designed visuals for the event.</div>
+          <span class="timeline-tag">Event Visual</span>
+          <span class="timeline-tag">Operator</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-title">Supee Rose</div>
+          <div class="timeline-role">Freelance Editor</div>
+          <div class="timeline-desc">Edited PR and VLOG clips for the client.</div>
+          <span class="timeline-tag">Freelance</span>
+          <span class="timeline-tag">Editor</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ============================================================
      🟠 CONTACT SECTION
      Change your email, Instagram, Vimeo, and LinkedIn links
@@ -812,8 +1131,8 @@
      ============================================================ -->
 <section id="contact" style="position:relative; overflow:hidden;">
   <div class="hero-particles" id="particles-contact"></div>
-  <div class="section-label">Contact <span>/ 04</span></div>
-  <div class="contact-inner">
+  <div class="section-label reveal">Contact <span>/ 04</span></div>
+  <div class="contact-inner reveal">
     <h2>LET'S<br>MAKE<br><span class="outline">SOMETHING.</span></h2>
 
     <!-- 📝 Change this short paragraph -->
@@ -852,6 +1171,123 @@
 </footer>
 
 <script>
+  // Hamburger Menu
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('menu-overlay');
+    hamburger.classList.toggle('open');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  // Preloader
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hide');
+    }, 1500);
+  });
+
+  // Share Portfolio
+  function sharePortfolio() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const toast = document.getElementById('share-toast');
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+      }, 2000);
+    });
+  }
+
+  // Search Projects
+  const searchInput = document.getElementById('search-input');
+  const noResult = document.getElementById('search-no-result');
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.project-card');
+    let visible = 0;
+    cards.forEach(card => {
+      const name = card.querySelector('.project-name')?.textContent.toLowerCase() || '';
+      const cat = card.querySelector('.project-cat')?.textContent.toLowerCase() || '';
+      const desc = card.querySelector('.project-desc')?.textContent.toLowerCase() || '';
+      const match = !query || name.includes(query) || cat.includes(query) || desc.includes(query);
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    noResult.style.display = visible === 0 ? 'block' : 'none';
+  });
+
+  // Debounce utility
+  function debounce(fn, delay) {
+    let timer;
+    return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
+  }
+
+  // Scroll Progress Bar
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+  }, { passive: true });
+
+  // Active Nav Highlight
+  const sections = document.querySelectorAll('section[id], .hero[id]');
+  const navLinks = document.querySelectorAll('nav ul li a');
+  window.addEventListener('scroll', debounce(() => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  }, 50), { passive: true });
+
+  // Typing Effect
+  const phrases = ['WELCOME TO ZO WORK PLEASE ENJOY', 'VIDEO EDITOR & VISUAL DESIGNER', 'BASED IN BANGKOK'];
+  let phraseIndex = 0, charIndex = 0, isDeleting = false;
+  const typingEl = document.getElementById('typing-text');
+  function type() {
+    const current = phrases[phraseIndex];
+    if (isDeleting) {
+      typingEl.textContent = current.substring(0, charIndex--);
+    } else {
+      typingEl.textContent = current.substring(0, charIndex++);
+    }
+    let speed = isDeleting ? 40 : 80;
+    if (!isDeleting && charIndex === current.length + 1) {
+      speed = 2000; isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      speed = 400;
+    }
+    setTimeout(type, speed);
+  }
+  type();
+
+  // Card Overlay — add to all project thumbs with images
+  document.querySelectorAll('.project-card .project-thumb img').forEach(img => {
+    const overlay = document.createElement('div');
+    overlay.className = 'card-overlay';
+    overlay.innerHTML = '<span>View Project →</span>';
+    img.parentElement.appendChild(overlay);
+  });
+
+  // Scroll Reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-stagger');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
   // Generate particles for contact section
   const contactContainer = document.getElementById('particles-contact');
   for (let i = 0; i < 40; i++) {
@@ -894,6 +1330,7 @@
   const visualGrid = document.getElementById('visual-grid');
   const editGrid = document.getElementById('edit-grid');
   const photoGrid = document.getElementById('photo-grid');
+  const photographyGrid = document.getElementById('photography-grid');
   const headings = document.querySelectorAll('.filter-heading');
 
   filterBtns.forEach(btn => {
@@ -902,26 +1339,24 @@
       btn.classList.add('active');
       const filter = btn.dataset.filter;
 
+      const show = (el) => el && (el.style.display = 'grid');
+      const hide = (el) => el && (el.style.display = 'none');
+
       if (filter === 'all') {
-        visualGrid.style.display = 'grid';
-        editGrid.style.display = 'grid';
-        photoGrid.style.display = 'grid';
+        show(visualGrid); show(editGrid); show(photoGrid); show(photographyGrid);
         headings.forEach(h => h.style.display = 'flex');
       } else if (filter === 'visual') {
-        visualGrid.style.display = 'grid';
-        editGrid.style.display = 'none';
-        photoGrid.style.display = 'none';
+        show(visualGrid); hide(editGrid); hide(photoGrid); hide(photographyGrid);
         headings.forEach(h => h.style.display = h.dataset.section === 'visual' ? 'flex' : 'none');
       } else if (filter === 'edit') {
-        visualGrid.style.display = 'none';
-        editGrid.style.display = 'grid';
-        photoGrid.style.display = 'none';
+        hide(visualGrid); show(editGrid); hide(photoGrid); hide(photographyGrid);
         headings.forEach(h => h.style.display = h.dataset.section === 'edit' ? 'flex' : 'none');
       } else if (filter === 'photo') {
-        visualGrid.style.display = 'none';
-        editGrid.style.display = 'none';
-        photoGrid.style.display = 'grid';
+        hide(visualGrid); hide(editGrid); show(photoGrid); hide(photographyGrid);
         headings.forEach(h => h.style.display = h.dataset.section === 'photo' ? 'flex' : 'none');
+      } else if (filter === 'photography') {
+        hide(visualGrid); hide(editGrid); hide(photoGrid); show(photographyGrid);
+        headings.forEach(h => h.style.display = h.dataset.section === 'photography' ? 'flex' : 'none');
       }
     });
   });
@@ -929,7 +1364,7 @@
   // Album data — add photo URLs here
   const albums = {
     'visual-work': {
-      title: 'Visual Work',
+      title: 'Event Work',
       photos: [
         { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B8%A1%E0%B8%B5%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD-12.jpg', caption: '' },
         { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_20251029_131439.jpg', caption: '' },
@@ -947,6 +1382,45 @@
         { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-42-50-561_com.instagram.android-edit.jpg', caption: '' },
       ]
     },
+    'production-work': {
+      title: 'Production Work',
+      photos: [
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_5357.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_5456.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_5463.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_8660.JPG', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_8684.JPG', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/retouch_2025022022384387.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/retouch_2025052712004180.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/retouch_2025052712024284.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/DSC07572.JPG', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/DSC07709.JPG', caption: '' },
+      ]
+    },
+    'food': {
+      title: 'Food',
+      photos: [
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_1184.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_1259.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_1088.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_1181.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_0955.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_0969.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_0780.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/IMG_0826.jpg', caption: '' },
+      ]
+    },
+    'fashion': {
+      title: 'Fashion',
+      photos: [
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/675930213_1748709696505577_2342924610634858975_n.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/677154650_1748709533172260_171069394757373634_n.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/674932479_1748709569838923_2899444905533745104_n.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/678149620_1748709546505592_2029288713132601805_n.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/678400982_1748709563172257_7651235254896873355_n.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/678982747_1748709586505588_6736790675843290707_n.jpg', caption: '' },
+      ]
+    },
     'edit-work': {
       title: 'Edit Work',
       photos: [
@@ -960,6 +1434,7 @@
         { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-41-24-384_com.instagram.android-edit.jpg', caption: '' },
         { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-41-35-616_com.instagram.android-edit.jpg', caption: '' },
         { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-27-18-41-56-613_com.instagram.android-edit.jpg', caption: '' },
+        { src: 'https://raw.githubusercontent.com/xooxrn/supakornxportfolio/main/Screenshot_2026-04-28-00-21-27-709_com.instagram.android-edit.jpg', caption: '' },
       ]
     }
   };
